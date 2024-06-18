@@ -1,0 +1,50 @@
+package Arrays;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class SubArraWithK {
+    public static void main(String[] args) {
+        int sum = 0;
+        int length = 0;
+        HashMap<Integer,Integer> result = new HashMap<>();
+        
+        
+        
+        for(int i = 0;i<A.length;i++){
+            
+            sum+=A[i];
+            
+            
+            if(sum==K){
+                length = i+1;
+            }
+            else{
+                int value = sum - K;
+                if(result.containsKey(value)){
+                    int found  = result.get(value);
+                    int r = i - found;
+                    if(r>length){
+                        length = r; 
+                    }
+                }
+            }
+            
+            
+            
+            if(!result.containsKey(sum)){
+                result.put(sum,i);
+            }
+
+            
+        }
+        
+        return length;
+        
+        
+
+
+    }
+}
