@@ -161,6 +161,117 @@ public class Linked {
 
         return -1;
     }
+    //Search a key using Linked List Recursion
+    public static int searchKey(Node head,int key){
+        if(head==null){
+            return -1;
+        };
+
+        if(head.data==key){
+            return 0;
+        }
+
+        int index = searchKey(head.next,key);
+        if(index==-1){
+            return -1;
+        }
+
+        return index+1;
+    }
+
+    //Reversing an array    
+    public  void Reverse(){
+        Node prev = null;Node current = head;
+        Node next;
+
+        while(current!=null){
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+            
+        }
+        head = prev;
+    }
+
+
+    //Remove the element from the end
+
+    public void removeElement(Node head,int n){
+        int size = 0;
+        Node temp = head;
+
+        while(temp!=null){
+            temp = temp.next;
+            size++;
+        }
+
+        if(size==n){
+            head = head.next;
+            return;
+        }
+        int i = 1;
+        Node prev = head;
+        int till = size-n;
+        while(i<till){
+            prev = prev.next;
+            i++;
+        }
+
+        prev.next = prev.next.next;   
+
+    }
+
+
+    public Node findMid(Node head){
+        Node slow = head;
+        Node fast = head;
+
+        while(fast!=null && fast.next!=null){
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return slow;
+    }
+
+    public boolean isPalindromeOrNot(Node head){
+        if(head==null || head.next==null){
+            return true;
+        }
+
+        Node mid = findMid(head);
+
+        Node prev = null;Node current = mid;
+        Node next;
+
+        while(current!=null){
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+            
+        }
+        Node right = prev;
+        Node left = head;
+
+
+        while(right!=null){
+            if(left.data!=right.data){
+                return false;
+            }
+            left = left.next;
+            right = right.next;
+
+        }
+
+
+
+
+
+
+
+        return true;
+    }
 
 
     public static void main(String[] args) {
@@ -168,13 +279,20 @@ public class Linked {
         Linked ll = new Linked();
         ll.addFirst(1);
         ll.addLast(2);
-        ll.addLast(3);
-        ll.addLast(4);
-        ll.addMiddle(5, 2);
+        ll.addLast(2);
+        ll.addLast(1);
 
          
         ll.Printf();
         System.out.println(ll.returnELement(4));
+
+        System.out.println("The index is at " +searchKey(head, 4));
+        ll.Reverse();
+        ll.Printf();
+        ll.Printf();
+
+        System.out.println(ll.isPalindromeOrNot(head));
+
     }
 }
 
